@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minha Vitrine Shopee</title>
+  
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s ease;
+  }
+  header {
+    background-color: #ee4d2d;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .container {
+    padding: 2rem 1rem;
+    max-width: 960px;
+    margin: auto;
+  }
+  .link-area input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: box-shadow 0.3s;
+  }
+  .link-area input:focus {
+    box-shadow: 0 0 5px rgba(238, 77, 45, 0.5);
+    outline: none;
+  }
+  .btn {
+    background-color: #ee4d2d;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 0.7rem;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn:hover {
+    background-color: #d63c1f;
+    transform: scale(1.02);
+  }
+  .share-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .share-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    background: white;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+  .share-button:hover {
+    transform: scale(1.05);
+  }
+  .share-button img {
+    width: 20px;
+    height: 20px;
+  }
+  .product-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .product-card:hover {
+    transform: scale(1.01);
+  }
+  .product-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+  .product-details {
+    padding: 1rem 1.2rem;
+  }
+  .product-details p {
+    margin: 0.5rem 0;
+    word-break: break-word;
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <h1>Minha Vitrine Shopee</h1>
+  </header>
+  <div class="container">
+    <div class="link-area">
+      <h2>Gerar link de afiliado</h2>
+      <input type="text" id="codigoAfiliado" placeholder="Digite seu código de afiliado..." value="18373100589">
+      <input type="text" id="produtoLink" placeholder="Cole o link do produto aqui...">
+      <button class="btn" onclick="gerarLinkAfiliado()">Gerar link afiliado</button>
+      <input type="text" id="linkAfiliado" readonly placeholder="Seu link aparecerá aqui...">
+
+      <div class="share-area" id="shareButtons">
+        <a href="#" class="share-button" id="whatsappShare" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">WhatsApp
+        </a>
+        <a href="#" class="share-button" onclick="instruir('Instagram')">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">Instagram
+        </a>
+        <a href="#" class="share-button" id="facebookShare" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">Facebook
+        </a>
+        <button class="share-button" onclick="compartilharTikTok()">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok">TikTok
+        </button>
+        <button class="share-button" onclick="instruir('Kwai')">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Kuaishou_app_logo.svg" alt="Kwai">Kwai
+        </button>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://shopee.com.br/flash_sale?afmc=18373100589" target="_blank" class="btn">Promoções do Dia</a>
+    </div>
+
+    <div class="history">
+      <h2>Histórico de Vitrines</h2>
+      <div id="historyContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    function gerarLinkAfiliado() {
+      const linkOriginal = document.getElementById('produtoLink').value.trim();
+      const codigoAfiliado = document.getElementById('codigoAfiliado').value.trim();
+
+      if (!linkOriginal || !codigoAfiliado) {
+        alert("Cole o link do produto e insira seu código de afiliado.");
+        return;
+      }
+
+      const tagAfiliado = `?afmc=${codigoAfiliado}`;
+      const linkAfiliado = linkOriginal + tagAfiliado;
+      document.getElementById('linkAfiliado').value = linkAfiliado;
+
+      document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(linkAfiliado)}`;
+      document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkAfiliado)}`;
+
+      const imageUrl = getImageFromShopee(linkOriginal);
+
+      const item = { original: linkOriginal, afiliado: linkAfiliado, imagem: imageUrl };
+      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
+      historico.unshift(item);
+      localStorage.setItem("historicoLinks", JSON.stringify(historico));
+      renderizarHistorico();
+    }
+
+    function getImageFromShopee(url) {
+      const match = url.match(/i\.(\d+)\.(\d+)/);
+      if (match) {
+        return `https://down-br.img.susercontent.com/file/${match[2]}`;
+      }
+      return "https://via.placeholder.com/300?text=Sem+Imagem";
+    }
+
+    function instruir(plataforma) {
+      alert(`Para compartilhar no ${plataforma}, copie o link gerado e cole na bio ou descrição do vídeo.`);
+    }
+
+    function compartilharTikTok() {
+      const link = document.getElementById('linkAfiliado').value;
+      if (!link) {
+        alert('Gere um link de afiliado primeiro!');
+        return;
+      }
+      navigator.clipboard.writeText(link);
+      alert('Link copiado! Agora cole na bio ou descrição do vídeo no TikTok.');
+    }
+
+    function renderizarHistorico() {
+      const container = document.getElementById("historyContainer");
+      container.innerHTML = "";
+      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
+
+      historico.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${item.imagem}" class="product-image" alt="Produto Shopee">
+          <div class="product-details">
+            <p><strong>Original:</strong> ${item.original}</p>
+            <p><strong>Afiliado:</strong> ${item.afiliado}</p>
+            <button class="btn" onclick="recompartilhar('${item.afiliado}')">Recompartilhar</button>
+            <button class="btn" onclick="excluirItem(${index})" style="background-color: #999;">Excluir</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function recompartilhar(link) {
+      document.getElementById('linkAfiliado').value = link;
+      document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(link)}`;
+      document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+      alert("Link preparado para novo compartilhamento!");
+    }
+
+    function excluirItem(index) {
+      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
+      historico.splice(index, 1);
+      localStorage.setItem("historicoLinks", JSON.stringify(historico));
+      renderizarHistorico();
+    }
+
+    document.addEventListener('paste', function (e) {
+      const text = (e.clipboardData || window.clipboardData).getData('text');
+      if (text.includes('shopee.com.br')) {
+        const colar = confirm("Detectamos um link da Shopee. Deseja colar no campo de link do produto?");
+        if (colar) {
+          document.getElementById('produtoLink').value = text;
+        }
+      }
+    });
+
+    window.onload = renderizarHistorico;
+  </script>
+</body>
+</html>
