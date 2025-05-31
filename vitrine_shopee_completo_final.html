@@ -2,8 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Night Food - Modo de Preparo</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -14,56 +19,89 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      min-height: 100vh;
     }
 
     header {
-      margin-top: 50px;
+      margin-top: 20px;
+      padding: 10px;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2em;
       color: #ffcc00;
-      text-shadow: 2px 2px 5px #000;
+      text-shadow: 1px 1px 3px #000;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 1em;
+      color: #ccc;
+      margin-bottom: 20px;
     }
 
     nav {
-      margin: 30px 0;
+      margin: 20px 0;
       display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      width: 90%;
+      max-width: 400px;
     }
 
     nav button {
       background-color: #ffcc00;
       color: #121212;
       border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 1em;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1.1em;
       cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
 
     nav button:hover {
       background-color: #ffaa00;
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
 
     .preparo {
       display: none;
-      max-width: 600px;
-      margin: 20px;
-      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px 0;
+      padding: 15px;
       background: #1e1e1e;
       border-radius: 10px;
       box-shadow: 0 0 10px #000;
+      text-align: left;
+    }
+
+    .preparo h2 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    .preparo ol {
+      padding-left: 20px;
     }
 
     footer {
-      margin: 30px 0;
-      font-size: 0.9em;
+      margin: 20px 0;
+      font-size: 0.8em;
       color: #888;
+    }
+
+    @media (min-width: 600px) {
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav button {
+        flex: 1 1 45%;
+      }
     }
   </style>
 </head>
