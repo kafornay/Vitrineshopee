@@ -1,247 +1,172 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minha Vitrine Shopee</title>
-  
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f2f2f2;
-    margin: 0;
-    padding: 0;
-    transition: background 0.3s ease;
-  }
-  header {
-    background-color: #ee4d2d;
-    color: white;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  }
-  .container {
-    padding: 2rem 1rem;
-    max-width: 960px;
-    margin: auto;
-  }
-  .link-area input {
-    width: 100%;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: box-shadow 0.3s;
-  }
-  .link-area input:focus {
-    box-shadow: 0 0 5px rgba(238, 77, 45, 0.5);
-    outline: none;
-  }
-  .btn {
-    background-color: #ee4d2d;
-    color: white;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 0.7rem;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .btn:hover {
-    background-color: #d63c1f;
-    transform: scale(1.02);
-  }
-  .share-area {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  .share-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    background: white;
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-weight: 600;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
-  }
-  .share-button:hover {
-    transform: scale(1.05);
-  }
-  .share-button img {
-    width: 20px;
-    height: 20px;
-  }
-  .product-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    margin-bottom: 2rem;
-    overflow: hidden;
-    transition: transform 0.2s;
-  }
-  .product-card:hover {
-    transform: scale(1.01);
-  }
-  .product-image {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
-  }
-  .product-details {
-    padding: 1rem 1.2rem;
-  }
-  .product-details p {
-    margin: 0.5rem 0;
-    word-break: break-word;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Night Food - Modo de Preparo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
+    header {
+      margin-top: 50px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ffcc00;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    nav {
+      margin: 30px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    nav button {
+      background-color: #ffcc00;
+      color: #121212;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #ffaa00;
+      transform: scale(1.05);
+    }
+
+    .preparo {
+      display: none;
+      max-width: 600px;
+      margin: 20px;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    footer {
+      margin: 30px 0;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Minha Vitrine Shopee</h1>
+    <h1>Night Food</h1>
+    <p>Escolha o produto para ver o modo de preparo:</p>
   </header>
-  <div class="container">
-    <div class="link-area">
-      <h2>Gerar link de afiliado</h2>
-      <input type="text" id="codigoAfiliado" placeholder="Digite seu código de afiliado..." value="18373100589">
-      <input type="text" id="produtoLink" placeholder="Cole o link do produto aqui...">
-      <button class="btn" onclick="gerarLinkAfiliado()">Gerar link afiliado</button>
-      <input type="text" id="linkAfiliado" readonly placeholder="Seu link aparecerá aqui...">
 
-      <div class="share-area" id="shareButtons">
-        <a href="#" class="share-button" id="whatsappShare" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">WhatsApp
-        </a>
-        <a href="#" class="share-button" onclick="instruir('Instagram')">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">Instagram
-        </a>
-        <a href="#" class="share-button" id="facebookShare" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">Facebook
-        </a>
-        <button class="share-button" onclick="compartilharTikTok()">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok">TikTok
-        </button>
-        <button class="share-button" onclick="instruir('Kwai')">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Kuaishou_app_logo.svg" alt="Kwai">Kwai
-        </button>
-      </div>
-    </div>
+  <nav>
+    <button onclick="mostrar('salgado')">Salgado</button>
+    <button onclick="mostrar('pizza')">Pizza</button>
+    <button onclick="mostrar('pao')">Pão de Queijo</button>
+    <button onclick="mostrar('empadao')">Empadão</button>
+    <button onclick="mostrar('carnes')">Carnes</button>
+    <button onclick="mostrar('saladas')">Saladas</button>
+    <button onclick="mostrar('sobremesas')">Sobremesas</button>
+    <button onclick="mostrar('bebidas')">Bebidas</button>
+  </nav>
 
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="https://shopee.com.br/flash_sale?afmc=18373100589" target="_blank" class="btn">Promoções do Dia</a>
-    </div>
+  <section id="salgado" class="preparo">
+    <h2>Salgado</h2>
+    <ol>
+      <li>Pré-aqueça o forno a 180°C.</li>
+      <li>Coloque os salgados na assadeira.</li>
+      <li>Asse por 20 minutos ou até dourar.</li>
+    </ol>
+  </section>
 
-    <div class="history">
-      <h2>Histórico de Vitrines</h2>
-      <div id="historyContainer"></div>
-    </div>
-  </div>
+  <section id="pizza" class="preparo">
+    <h2>Pizza</h2>
+    <ol>
+      <li>Pré-aqueça o forno a 220°C.</li>
+      <li>Coloque a pizza na grade do forno.</li>
+      <li>Asse por 15 minutos ou até o queijo derreter.</li>
+    </ol>
+  </section>
+
+  <section id="pao" class="preparo">
+    <h2>Pão de Queijo</h2>
+    <ol>
+      <li>Pré-aqueça o forno a 180°C.</li>
+      <li>Disponha os pães de queijo na assadeira.</li>
+      <li>Asse por 25 minutos ou até dourar.</li>
+    </ol>
+  </section>
+
+  <section id="empadao" class="preparo">
+    <h2>Empadão</h2>
+    <ol>
+      <li>Pré-aqueça o forno a 200°C.</li>
+      <li>Leve o empadão ao forno.</li>
+      <li>Asse por 30 a 40 minutos ou até dourar.</li>
+    </ol>
+  </section>
+
+  <section id="carnes" class="preparo">
+    <h2>Carnes</h2>
+    <ol>
+      <li>Pré-aqueça a grelha ou frigideira.</li>
+      <li>Tempere a carne a gosto.</li>
+      <li>Cozinhe até o ponto desejado.</li>
+    </ol>
+  </section>
+
+  <section id="saladas" class="preparo">
+    <h2>Saladas</h2>
+    <ol>
+      <li>Lave bem todos os ingredientes.</li>
+      <li>Corte e misture conforme desejado.</li>
+      <li>Tempere com azeite, sal e vinagre.</li>
+    </ol>
+  </section>
+
+  <section id="sobremesas" class="preparo">
+    <h2>Sobremesas</h2>
+    <ol>
+      <li>Retire do congelador 10 minutos antes de servir.</li>
+      <li>Sirva gelado.</li>
+    </ol>
+  </section>
+
+  <section id="bebidas" class="preparo">
+    <h2>Bebidas</h2>
+    <ol>
+      <li>Sirva gelado ou conforme indicado na embalagem.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <p>© 2025 Night Food. Todos os direitos reservados.</p>
+  </footer>
 
   <script>
-    function gerarLinkAfiliado() {
-      const linkOriginal = document.getElementById('produtoLink').value.trim();
-      const codigoAfiliado = document.getElementById('codigoAfiliado').value.trim();
-
-      if (!linkOriginal || !codigoAfiliado) {
-        alert("Cole o link do produto e insira seu código de afiliado.");
-        return;
-      }
-
-      const tagAfiliado = `?afmc=${codigoAfiliado}`;
-      const linkAfiliado = linkOriginal + tagAfiliado;
-      document.getElementById('linkAfiliado').value = linkAfiliado;
-
-      document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(linkAfiliado)}`;
-      document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkAfiliado)}`;
-
-      const imageUrl = getImageFromShopee(linkOriginal);
-
-      const item = { original: linkOriginal, afiliado: linkAfiliado, imagem: imageUrl };
-      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
-      historico.unshift(item);
-      localStorage.setItem("historicoLinks", JSON.stringify(historico));
-      renderizarHistorico();
+    function mostrar(id) {
+      const secoes = document.querySelectorAll('.preparo');
+      secoes.forEach(secao => secao.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
     }
 
-    function getImageFromShopee(url) {
-      const match = url.match(/i\.(\d+)\.(\d+)/);
-      if (match) {
-        return `https://down-br.img.susercontent.com/file/${match[2]}`;
-      }
-      return "https://via.placeholder.com/300?text=Sem+Imagem";
+    window.onload = function() {
+      mostrar('salgado'); 
     }
-
-    function instruir(plataforma) {
-      alert(`Para compartilhar no ${plataforma}, copie o link gerado e cole na bio ou descrição do vídeo.`);
-    }
-
-    function compartilharTikTok() {
-      const link = document.getElementById('linkAfiliado').value;
-      if (!link) {
-        alert('Gere um link de afiliado primeiro!');
-        return;
-      }
-      navigator.clipboard.writeText(link);
-      alert('Link copiado! Agora cole na bio ou descrição do vídeo no TikTok.');
-    }
-
-    function renderizarHistorico() {
-      const container = document.getElementById("historyContainer");
-      container.innerHTML = "";
-      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
-
-      historico.forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${item.imagem}" class="product-image" alt="Produto Shopee">
-          <div class="product-details">
-            <p><strong>Original:</strong> ${item.original}</p>
-            <p><strong>Afiliado:</strong> ${item.afiliado}</p>
-            <button class="btn" onclick="recompartilhar('${item.afiliado}')">Recompartilhar</button>
-            <button class="btn" onclick="excluirItem(${index})" style="background-color: #999;">Excluir</button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function recompartilhar(link) {
-      document.getElementById('linkAfiliado').value = link;
-      document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(link)}`;
-      document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
-      alert("Link preparado para novo compartilhamento!");
-    }
-
-    function excluirItem(index) {
-      const historico = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
-      historico.splice(index, 1);
-      localStorage.setItem("historicoLinks", JSON.stringify(historico));
-      renderizarHistorico();
-    }
-
-    document.addEventListener('paste', function (e) {
-      const text = (e.clipboardData || window.clipboardData).getData('text');
-      if (text.includes('shopee.com.br')) {
-        const colar = confirm("Detectamos um link da Shopee. Deseja colar no campo de link do produto?");
-        if (colar) {
-          document.getElementById('produtoLink').value = text;
-        }
-      }
-    });
-
-    window.onload = renderizarHistorico;
   </script>
 </body>
 </html>
