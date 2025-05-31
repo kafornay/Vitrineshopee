@@ -1,2 +1,0 @@
-# Vitrineshopee
-Ferramenta para postagem 
